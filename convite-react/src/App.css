@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #c8d8e8; min-height: 100vh; font-family: 'Lato', sans-serif; }
+
+.bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #b8cfe0 0%, #d4e4f0 50%, #c0d4e4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ── HINT ── */
+.hint {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(44, 74, 110, 0.5);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* ── ENVELOPE ── */
+.envelope-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope {
+  position: relative;
+  width: 360px;
+  height: 250px;
+  cursor: pointer;
+  perspective: 900px;
+  filter: drop-shadow(0 20px 40px rgba(44,74,110,0.25));
+}
+
+.env-aba {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;
+  border-left: 180px solid transparent;
+  border-right: 180px solid transparent;
+  border-top: 130px solid #dce8f2;
+  z-index: 10;
+}
+.env-aba::after {
+  content: '';
+  position: absolute;
+  top: -132px; left: -182px;
+  border-left: 182px solid transparent;
+  border-right: 182px solid transparent;
+  border-top: 132px solid rgba(44,74,110,0.15);
+  z-index: -1;
+}
+
+.env-corpo {
+  position: absolute;
+  inset: 28px 0 0 0;
+  background: linear-gradient(160deg, #f8f4ee 0%, #f0ece4 100%);
+  border: 1px solid rgba(44,74,110,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.env-flores-topo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 80px; height: 70px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(100,130,180,0.4) 0%, transparent 50%),
+    radial-gradient(circle at 60% 40%, rgba(180,160,200,0.3) 0%, transparent 40%);
+}
+
+.env-lacre {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f8f4ee, #ede8e0);
+  border: 1.5px solid rgba(44,74,110,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 14px;
+  color: #2c4a6e;
+  box-shadow: 0 2px 12px rgba(44,74,110,0.15);
+  z-index: 5;
+}
+.env-e { color: #b8963c; font-size: 16px; }
+
+/* ── CONVITE ── */
+.convite {
+  position: relative;
+  width: 420px;
+  max-width: 95vw;
+  background: linear-gradient(170deg, #f8f6f0 0%, #f2ede4 40%, #eee8dc 100%);
+  box-shadow: 0 30px 80px rgba(44,74,110,0.3), 0 0 0 1px rgba(44,74,110,0.1);
+  overflow: hidden;
+  /* Textura de papel */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    linear-gradient(170deg, #f8f6f0 0%, #f2ede4 40%, #eee8dc 100%);
+}
+
+.fechar {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: none;
+  border: 1px solid rgba(44,74,110,0.25);
+  color: rgba(44,74,110,0.5);
+  width: 28px; height: 28px;
+  font-size: 11px;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.2s;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 50%;
+}
+.fechar:hover { color: #2c4a6e; border-color: rgba(44,74,110,0.6); }
+
+/* Flores canto superior esquerdo */
+.flores-tl {
+  position: absolute;
+  top: -10px; left: -10px;
+  width: 200px; height: 200px;
+  background-image: url('/foto2.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  border-radius: 0 0 100% 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Flores canto inferior direito */
+.flores-br {
+  position: absolute;
+  bottom: -10px; right: -10px;
+  width: 160px; height: 160px;
+  background-image: url('/foto3.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  border-radius: 100% 0 0 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ── CORPO DO CONVITE ── */
+.convite-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 40px 40px;
+  text-align: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.nome {
+  font-family: 'Great Vibes', cursive;
+  font-size: 72px;
+  font-weight: 400;
+  color: #1e3a5f;
+  line-height: 1.1;
+  text-shadow: 1px 2px 4px rgba(44,74,110,0.1);
+}
+
+.ampersand {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #b8963c;
+  line-height: 1;
+  margin: 4px 0;
+}
+
+.subtitulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #2c4a6e;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* Bloco de data */
+.data-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 28px;
+}
+
+.data-mes {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #2c4a6e;
+}
+
+.data-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.data-lado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.data-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #2c4a6e;
+}
+
+.data-traço {
+  width: 60px;
+  height: 1px;
+  background: #2c4a6e;
+  opacity: 0.4;
+}
+
+.data-dia {
+  font-family: 'Great Vibes', cursive;
+  font-size: 80px;
+  color: #1e3a5f;
+  line-height: 1;
+}
+
+.data-ano {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #2c4a6e;
+}
+
+.versiculo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 20px;
+  color: #2c4a6e;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.endereco {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #2c4a6e;
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 480px) {
+  .envelope { width: 300px; height: 210px; }
+  .env-aba { border-left-width: 150px; border-right-width: 150px; border-top-width: 110px; }
+  .env-aba::after { top: -112px; left: -152px; border-left-width: 152px; border-right-width: 152px; border-top-width: 112px; }
+  .nome { font-size: 58px; }
+  .data-dia { font-size: 64px; }
+  .convite-body { padding: 40px 28px 32px; }
+}
