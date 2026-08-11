@@ -17,19 +17,21 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html, body { height: 100%; scroll-behavior: smooth; }
 body {
   background: var(--navy);
   color: var(--white);
   font-family: var(--f-ui);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ── SEAL PAGE ── */
 .seal-page {
-  min-height: 100dvh;
+  min-height: 100vh;
   background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #0a1428 100%);
   display: flex;
   align-items: center;
@@ -121,7 +123,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ── HERO ── */
 .hero {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -130,7 +132,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .hero-invite-side {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -753,7 +755,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero-invite-side {
-    min-height: 100dvh;
+    min-height: 100vh;
     padding: 5rem 1.5rem 6rem;
     justify-content: center;
   }
