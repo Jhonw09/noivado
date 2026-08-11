@@ -88,13 +88,19 @@ function InvitePage({ onClose }) {
 /* ── HERO ── */
 function Hero() {
   const ref = useRef(null)
-  const [zoomConvite, setZoomConvite] = useState(false)
+  const [zoomed, setZoomed] = useState(false)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const fadeOut = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const imgY    = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
   return (
     <section className="hero" ref={ref}>
+      {zoomed && (
+        <div className="hero-zoom-layer" onClick={() => setZoomed(false)}>
+          <img src="/convite.jpeg" alt="Convite ampliado" className="hero-zoom-img" />
+        </div>
+      )}
+
       <div className="hero-photo-side">
         <motion.div style={{ position: 'absolute', inset: '-20%', y: imgY }}>
           <img src="/foto4.jpeg" alt="" />
@@ -104,44 +110,20 @@ function Hero() {
 
       <motion.div className="hero-invite-side" style={{ opacity: fadeOut }}>
         <Rise delay={0.3}>
-          <motion.div className="hero-invite-frame"
-            onClick={() => setZoomConvite(true)} whileTap={{ scale: 0.97 }}>
+          <motion.div className="hero-invite-frame" onClick={() => setZoomed(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
             <img src="/convite.jpeg" alt="Convite de Noivado Karine e Jonas" className="hero-invite-img" />
           </motion.div>
-          <span className="invite-hint">toque para ampliar</span>
         </Rise>
-      </motion.div>
-
-      <AnimatePresence>
-        {zoomConvite && (
-          <motion.div className="lightbox"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }} onClick={() => setZoomConvite(false)}>
-            <motion.img src="/convite.jpeg"
-              initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div className="hero-text-side" style={{ opacity: fadeOut }}>
-        <Rise delay={0.1}><span className="label">noivado</span></Rise>
-        <Rise delay={0.3}>
-          <h1 className="hero-title">
-            <em>Karine</em>
-            <span className="hero-amp">&amp;</span>
-            <em>Jonas</em>
-          </h1>
-        </Rise>
-        <Rise delay={0.5}><div className="hero-divider" /></Rise>
-        <Rise delay={0.6}><p className="hero-date">06 · 09 · 2026</p></Rise>
+        <div className="hero-zoom-hint">
+          toque para ampliar
+        </div>
       </motion.div>
 
       <motion.div className="hero-arrow" style={{ opacity: fadeOut }}
-        animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}>
-        <svg width="1" height="48" viewBox="0 0 1 48">
-          <line x1="0.5" y1="0" x2="0.5" y2="48" stroke="rgba(201,168,76,.4)" strokeWidth="1"/>
+        animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }}>
+        <span>deslize para explorar</span>
+        <svg width="22" height="42" viewBox="0 0 22 42" fill="none" aria-hidden="true">
+          <path d="M11 1v37M4 31l7 8 7-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </motion.div>
     </section>
@@ -156,33 +138,15 @@ function Celebration() {
         <div className="celebration-inner">
           <span className="corner-tl" />
           <span className="corner-br" />
-          <div className="names-stack">
-            <h2 className="big-name">Karine</h2>
-            <div className="names-sep">
-              <span className="names-sep-line" />
-              <span className="names-e">&amp;</span>
-              <span className="names-sep-line" />
-            </div>
-            <h2 className="big-name">Jonas</h2>
-          </div>
-        </div>
-      </Rise>
-      <Rise delay={0.2}>
-        <div className="date-inner">
-          <div className="date-side">
-            <span className="date-tag">Domingo</span>
-            <span className="date-tag">Setembro</span>
-          </div>
-          <div className="date-mid">
-            <motion.span className="date-num"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}>
-              06
-            </motion.span>
-          </div>
-          <div className="date-side date-side-r">
-            <span className="date-tag">13h00</span>
-            <span className="date-tag">2026</span>
+          <div className="rsvp-content">
+            <p className="rsvp-title">confirme sua presença</p>
+            <a className="rsvp-btn"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc7MV54JAOYJEVeEj0s7QsyisgWqUhrxvbnLehkTeqJ_wxm5w/viewform"
+              target="_blank"
+              rel="noreferrer">
+              clique aqui
+            </a>
+            <p className="rsvp-note">Até 30/08</p>
           </div>
         </div>
       </Rise>
@@ -198,10 +162,10 @@ function Quote() {
         <div className="quote-inner">
           <div className="quote-rule" />
           <blockquote className="quote-text">
-            "As muitas águas não apagariam este amor,<br />
-            nem os rios o afogariam."
+            "E n&oacute;s conhecemos, e cremos no amor que Deus nos tem. Deus &eacute; amor;<br />
+            e quem est&aacute; em amor est&aacute; em Deus, e Deus nele."
           </blockquote>
-          <cite className="quote-cite">Cânticos 8:7</cite>
+          <cite className="quote-cite">1 Jo&atilde;o 4:16</cite>
           <div className="quote-rule" />
         </div>
       </Rise>
@@ -233,7 +197,10 @@ function Venue() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
               </svg>
-              Google Maps
+              <span>
+                <strong>Google Maps</strong>
+                <small>abrir rota</small>
+              </span>
             </a>
             <a className="venue-map-btn"
               href="https://waze.com/ul?q=Cerejeira+Espa%C3%A7o+de+Eventos+Carapicu%C3%ADba+SP&navigate=yes"
@@ -241,7 +208,10 @@ function Venue() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
               </svg>
-              Waze
+              <span>
+                <strong>Waze</strong>
+                <small>navegar agora</small>
+              </span>
             </a>
           </div>
         </div>
@@ -258,7 +228,6 @@ function Footer() {
         <span className="footer-pre">com amor</span>
         <h2 className="footer-names">Karine &amp; Jonas</h2>
         <span className="footer-rule" />
-        <p className="footer-date">06 · 09 · 2026</p>
       </Rise>
     </footer>
   )
@@ -310,3 +279,4 @@ function playChime() {
     })
   } catch (_) {}
 }
+ 
