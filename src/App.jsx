@@ -229,6 +229,7 @@ function Footer() {
         <h2 className="footer-names">Karine &amp; Jonas</h2>
         <span className="footer-rule" />
       </Rise>
+      <p className="footer-credit">© Jonas Arruda 2026</p>
     </footer>
   )
 }
